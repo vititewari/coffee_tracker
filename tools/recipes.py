@@ -35,7 +35,7 @@ def save_recipe(name, ingredients, method, time, rating, notes):
         return f"Failed to save recipe: {e}"
 
 
-def read_recipes(name):
+def read_recipes(name=None):
     """Read a recipe from the recipes.txt file by name.
 
     Args:
@@ -62,7 +62,7 @@ def read_recipes(name):
 
     for block in blocks:
         for line in block.splitlines():
-            if line.startswith("[NAME]:") and line[len("[NAME]:"):].strip().lower() == name.strip().lower():
+            if line.startswith("[NAME]:") and name.strip().lower() in line[len("[NAME]:"):].strip().lower():
                 return block
 
     return f"Error: No recipe found with the name '{name}'."

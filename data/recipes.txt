@@ -1,0 +1,7 @@
+[NAME]: Morning V60 Pour Over 
+[INGREDIENTS]: 20g medium-fine ground coffee, 300g water 
+[METHOD]: 95°C water, bloom for 45s with 60g, then pour in stages 
+[BREW_TIME]: 3 minutes 30 seconds 
+[RATING]: 4 
+[NOTES]: none
+---
