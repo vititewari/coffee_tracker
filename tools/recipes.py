@@ -68,6 +68,53 @@ def read_recipes(name=None):
     return f"Error: No recipe found with the name '{name}'."
 
 
+def delete_recipe(name):
+    """Delete a recipe from recipes.txt by name.
+
+    Args:
+        name: Name (or substring) of the recipe to delete. Matched case-insensitively
+              against the [NAME] line of each block.
+
+    Returns:
+        A string confirming deletion, or describing the error if not found or on failure.
+    """
+    try:
+        with open(RECIPES_PATH, "r") as f:
+            content = f.read()
+    except FileNotFoundError:
+        return "Error: recipes.txt file not found."
+    except Exception as e:
+        return f"Error reading file: {e}"
+
+    blocks = [block.strip() for block in content.split("---") if block.strip()]
+
+    kept = []
+    deleted = False
+    for block in blocks:
+        matched = False
+        for line in block.splitlines():
+            if line.startswith("[NAME]:") and name.strip().lower() in line[len("[NAME]:"):].strip().lower():
+                matched = True
+                break
+        if matched:
+            deleted = True
+        else:
+            kept.append(block)
+
+    if not deleted:
+        return f"Error: No recipe found with the name '{name}'."
+
+    try:
+        RECIPES_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(RECIPES_PATH, "w") as f:
+            for block in kept:
+                f.write(block + "\n---\n")
+    except Exception as e:
+        return f"Error writing file: {e}"
+
+    return f"Recipe '{name}' deleted successfully."
+
+
 def analyse_recipes(name):
     """Read a recipe and return it formatted for analysis."""
     recipe = read_recipes(name)

@@ -1,4 +1,4 @@
-from tools.recipes import save_recipe, read_recipes, analyse_recipes
+from tools.recipes import save_recipe, read_recipes, analyse_recipes, delete_recipe
 import anthropic
 
 client = anthropic.Anthropic()
@@ -42,12 +42,24 @@ tools = [
             },
         },
     },
+    {
+        "name": "delete_recipe",
+        "description": "Delete a recipe by name from the recipes file.",
+        "input_schema": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+                "name": {"type": "string", "description": "Name of the recipe to delete."},
+            },
+        },
+    },
 ]
 
 tool_router = {
     "save_recipe": save_recipe,
     "read_recipes": read_recipes,
     "analyse_recipes": analyse_recipes,
+    "delete_recipe": delete_recipe,
 }
 
 
@@ -63,7 +75,7 @@ def run_agent(user_message):
                 "You are a helpful barista assistant helping an intermediate coffee brewer "
                 "manage and improve their coffee recipes. The user hand grinds their beans, "
                 "owns a semi-professional coffee machine, and is a hardcore coffee lover who "
-                "prefers coffee that is not too sweet."
+                "prefers coffee that is not too bitter."
             ),
             tools=tools,
             messages=messages,

@@ -5,3 +5,10 @@
 [RATING]: 4 
 [NOTES]: none
 ---
+[NAME]: Americano 30ml 
+[INGREDIENTS]: Coffee beans, Water 
+[METHOD]: Espresso machine at 92°C. Aerate water using machine's steam to around 65°C, then mix espresso into water. Remove crema. 
+[BREW_TIME]: 3 minutes 
+[RATING]: 3.5/5 
+[NOTES]: Grind size: 7 on Timemore C3. Coffee dose: 15g. Works better with light to medium roast beans.
+---
